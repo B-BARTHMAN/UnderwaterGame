@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0de7p2deucd3"]
+
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="1_eu78p"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_tq1cx"]
+[ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="2_x1aml"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_cadp6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hp4jy"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gr04c"]
+
+[sub_resource type="Sky" id="Sky_nhufu"]
+sky_material = SubResource("ProceduralSkyMaterial_gr04c")
+
+[sub_resource type="Environment" id="Environment_0xlwx"]
+background_mode = 2
+sky = SubResource("Sky_nhufu")
+
+[node name="main" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.577675, 0.176295, -0.797002, -0.103461, 0.984337, 0.142743, 0.809683, 0, 0.586867, 0, 0, -3.67718)
+mesh = SubResource("PrismMesh_cadp6")
+skeleton = NodePath("../player/right_hand")
+surface_material_override/0 = SubResource("StandardMaterial3D_hp4jy")
+
+[node name="player" type="XROrigin3D" parent="."]
+
+[node name="camera" type="XRCamera3D" parent="player"]
+
+[node name="left_hand" type="XRController3D" parent="player"]
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="player/left_hand" instance=ExtResource("1_eu78p")]
+
+[node name="right_hand" type="XRController3D" parent="player"]
+tracker = &"right_hand"
+
+[node name="RightHand" parent="player/right_hand" instance=ExtResource("2_x1aml")]
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xlwx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.941394, 0.00445054, 0.33728, -0.337309, 0.012421, 0.941312, 0, -0.999913, 0.0131943, 0, 0, 0)
+
+[node name="StartXR" parent="." instance=ExtResource("1_tq1cx")]
