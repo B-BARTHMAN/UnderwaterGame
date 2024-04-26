@@ -172,7 +172,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_4fwso")
 [node name="terrain_body" type="StaticBody3D" parent="terrain"]
 
 [node name="terrain_collision" type="CollisionShape3D" parent="terrain/terrain_body"]
-visible = false
 shape = SubResource("HeightMapShape3D_hc5ea")
 script = ExtResource("5_7hcy2")
 max_height = 5.0
