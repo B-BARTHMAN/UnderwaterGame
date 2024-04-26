@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv3t8142ml1ac"]
+
+[ext_resource type="Script" path="res://scenes/fish.gd" id="1_8ytbo"]
+[ext_resource type="PackedScene" uid="uid://cvavfanedyi8d" path="res://assets/fish_orange.glb" id="1_uk1a8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3wa3k"]
+size = Vector3(1.35651, 2.48541, 5.04541)
+
+[sub_resource type="Curve3D" id="Curve3D_235io"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0183797, -0.0130816, -0.00149417, 1.35208, -0.504623, -1.39847, -1.35208, 0.504623, 1.39847, 0.0675046, 0.274709, 5.55024, 1.64459, -0.0013752, 0.034966, -1.64459, 0.0013752, -0.034966, -4.39371, -2.82699, 2.15363, 0.474487, -0.000288963, 1.96158, -0.474487, 0.000288963, -1.96158, -11.7836, 0.161351, 7.61309, 0, 0, 0, 0, 0, 0, -7.02009, 2.0875, 2.28208, -1.92761, 0.00158691, 1.5556, 1.92761, -0.00158691, -1.5556, -5.68641, 0.278732, -3.69104, 0, 0, 0, 0, 0, 0, 0.0183797, -0.0130816, -0.00149417),
+"tilts": PackedFloat32Array(0, 0, -1.99376, 0, 0, 0, 0)
+}
+point_count = 7
+
+[node name="Fish" type="CharacterBody3D"]
+script = ExtResource("1_8ytbo")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Character" parent="Pivot" instance=ExtResource("1_uk1a8")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0220642, -0.0550842, -0.747803)
+shape = SubResource("BoxShape3D_3wa3k")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_235io")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.999961, -0.000458041, -0.00883636, 0, 0.998659, -0.0517664, 0.00884823, -0.0517644, -0.99862, 0.0183797, -0.0130816, -0.00149417)

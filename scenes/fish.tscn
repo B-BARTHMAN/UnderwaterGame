@@ -44,7 +44,6 @@ speed = 0.775
 path_length = 2.8
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 curve = SubResource("Curve3D_ac3w8")
 script = SubResource("GDScript_yo2lg")
 

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv3t8142ml1ac"]
+
+[ext_resource type="Script" path="res://scenes/fish.gd" id="1_8ytbo"]
+[ext_resource type="PackedScene" uid="uid://cvavfanedyi8d" path="res://assets/fish_orange.glb" id="1_uk1a8"]
+[ext_resource type="Script" path="res://scenes/Path3D.gd" id="2_04n5q"]
+
+[sub_resource type="Curve3D" id="Curve3D_07sf4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.0399802, 0.0568565, -0.0125059, 0, 0, 0, 0, 0, 0, -0.772588, 0.929839, -2.01648, 0, 0, 0, 0, 0, 0, -0.153702, -0.0753008, -3.1364, 0, 0, 0, 0, 0, 0, 1.12388, -1.8182, -1.95904, 0, 0, 0, 0, 0, 0, 1.20725, -1.54485, 2.18543, 0, 0, 0, 0, 0, 0, -0.345758, 0.711545, 2.20193, 0, 0, 0, 0, 0, 0, -1.26521, 1.84871, 0.123377, 0, 0, 0, 0, 0, 0, -0.0399802, 0.0568565, -0.0125059),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+up_vector_enabled = false
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3wa3k"]
+size = Vector3(0.262406, 0.472065, 0.945374)
+
+[node name="Fish" type="Node3D"]
+script = ExtResource("1_8ytbo")
+speed = null
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(0.999996, -0.00027404, -0.00294649, 0.000286622, 0.999991, 0.00427675, 0.00294529, -0.00427758, 0.999987, -0.00370526, -0.00871778, 0.0126445)
+curve = SubResource("Curve3D_07sf4")
+script = ExtResource("2_04n5q")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.939206, 0.130019, 0.317783, 7.45058e-09, 0.92553, -0.378674, -0.343353, 0.355653, 0.869263, -0.0399802, 0.0568565, -0.0125059)
+
+[node name="Pivot" type="CharacterBody3D" parent="Path3D/PathFollow3D"]
+
+[node name="Character" parent="Path3D/PathFollow3D/Pivot" instance=ExtResource("1_uk1a8")]
+transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Pivot"]
+transform = Transform3D(1, 0, -5.96046e-08, 3.72529e-09, 1, 7.45058e-09, -2.98023e-08, 0, 1, -0.0321126, -0.0259988, -0.134222)
+shape = SubResource("BoxShape3D_3wa3k")

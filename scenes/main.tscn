@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0de7p2deucd3"]
+[gd_scene load_steps=11 format=3 uid="uid://c0de7p2deucd3"]
 
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="1_eu78p"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_tq1cx"]
+[ext_resource type="PackedScene" uid="uid://dnljxafte1ren" path="res://scenes/fish_spawner.tscn" id="2_6l4cn"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="2_x1aml"]
-[ext_resource type="Script" path="res://scenes/FishSpawner.gd" id="3_olqeh"]
-[ext_resource type="PackedScene" uid="uid://cv3t8142ml1ac" path="res://scenes/fish.tscn" id="4_74g6w"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_cadp6"]
 
@@ -33,15 +32,6 @@ func _process(delta):
 	pass
 "
 
-[sub_resource type="Curve3D" id="Curve3D_ma22x"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector3Array(-5.14273, -0.0462437, 0.208793, 5.14273, 0.0462437, -0.208793, -0.0404944, 0.00654149, 8.21833, -0.0519505, 0.870718, 4.91411, 0.0519505, -0.870718, -4.91411, 8.11075, -7.15256e-07, 0.249548, 5.13673, 0.524687, 0.0671964, -5.13673, -0.524687, -0.0671964, 0.0371262, -0.00625491, -7.85322, -0.334967, -1.02332, -5.55375, 0.334967, 1.02332, 5.55375, -8.01559, 0.000407457, 0.273622, -3.59722, -0.033452, 0.0664568, 3.59722, 0.033452, -0.0664568, -0.0404944, 0.00654149, 8.21833),
-"tilts": PackedFloat32Array(0, 0, 0, 0.0293905, 0)
-}
-point_count = 5
-up_vector_enabled = false
-
 [node name="main" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -62,23 +52,9 @@ transform = Transform3D(0.941394, 0.00445054, 0.33728, -0.337309, 0.012421, 0.94
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 102.12, 0)
 script = SubResource("GDScript_6lwvt")
 
-[node name="FishSpawner" type="Node3D" parent="Player"]
-transform = Transform3D(1, -2.91038e-11, 0, 2.91038e-11, 1, 0, 0, -5.82077e-11, 1, 0, -2.32831e-10, -8.9407e-08)
-script = ExtResource("3_olqeh")
-fish_scene = ExtResource("4_74g6w")
-
-[node name="SpawnTimer" type="Timer" parent="Player/FishSpawner"]
-wait_time = 1.165
-autostart = true
-
-[node name="SpawnPath" type="Path3D" parent="Player/FishSpawner"]
-transform = Transform3D(1, 2.91038e-11, 0, -2.91038e-11, 1, 0, -1.69407e-21, 5.82077e-11, 1, 0.039811, 7.15488e-07, -0.130926)
-curve = SubResource("Curve3D_ma22x")
-
-[node name="SpawnLocation" type="PathFollow3D" parent="Player/FishSpawner/SpawnPath"]
-transform = Transform3D(0.0405661, -0.0089769, -0.999137, 4.65661e-10, 0.99996, -0.00898429, 0.999177, 0.000364457, 0.0405645, -0.0404944, 0.00654149, 8.21833)
-
-[node name="Dummy" type="Node3D" parent="Player/FishSpawner/SpawnPath/SpawnLocation"]
+[node name="FishSpawner" parent="Player" node_paths=PackedStringArray("root_node", "player_camera") instance=ExtResource("2_6l4cn")]
+root_node = NodePath("../..")
+player_camera = NodePath("../Camera")
 
 [node name="Camera" type="XRCamera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.553013, 0.833173, 0, -0.833173, 0.553013, -0.539629, 8.88536, 7.2744)
@@ -92,5 +68,3 @@ tracker = &"left_hand"
 tracker = &"right_hand"
 
 [node name="RightHand" parent="Player/right_hand" instance=ExtResource("2_x1aml")]
-
-[connection signal="timeout" from="Player/FishSpawner/SpawnTimer" to="Player/FishSpawner" method="_on_spawn_timer_timeout"]

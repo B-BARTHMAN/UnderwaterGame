@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv3t8142ml1ac"]
+
+[ext_resource type="Script" path="res://scenes/fish.gd" id="1_8ytbo"]
+[ext_resource type="PackedScene" uid="uid://cvavfanedyi8d" path="res://assets/fish_orange.glb" id="1_uk1a8"]
+[ext_resource type="Script" path="res://scenes/Path3D.gd" id="2_04n5q"]
+
+[sub_resource type="Curve3D" id="Curve3D_07sf4"]
+up_vector_enabled = false
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3wa3k"]
+size = Vector3(0.262406, 0.472065, 0.945374)
+
+[node name="Fish" type="Node3D"]
+script = ExtResource("1_8ytbo")
+speed = null
+curve_bake_interval = null
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(0.999869, -0.000700641, -0.0161953, 0.00080517, 0.999979, 0.00644847, 0.0161904, -0.00646064, 0.999848, -0.00370526, -0.00871778, 0.0126445)
+curve = SubResource("Curve3D_07sf4")
+script = ExtResource("2_04n5q")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.991019, 0.0701423, 0.113848, 0, 0.851383, -0.524543, -0.133721, 0.519832, 0.843737, 0.00588075, 0.00440777, -0.0515773)
+
+[node name="Pivot" type="CharacterBody3D" parent="Path3D/PathFollow3D"]
+
+[node name="Character" parent="Path3D/PathFollow3D/Pivot" instance=ExtResource("1_uk1a8")]
+transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Pivot"]
+transform = Transform3D(1, 0, -5.96046e-08, 3.72529e-09, 1, 7.45058e-09, -2.98023e-08, 0, 1, -0.0321126, -0.0259988, -0.134222)
+shape = SubResource("BoxShape3D_3wa3k")
