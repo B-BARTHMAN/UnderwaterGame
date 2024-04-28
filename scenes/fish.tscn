@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv3t8142ml1ac"]
+
+[ext_resource type="Script" path="res://scenes/fish.gd" id="1_8ytbo"]
+[ext_resource type="PackedScene" uid="uid://cvavfanedyi8d" path="res://assets/fish_orange.glb" id="1_uk1a8"]
+
+[sub_resource type="Curve3D" id="Curve3D_ac3w8"]
+resource_local_to_scene = true
+
+[sub_resource type="GDScript" id="GDScript_yo2lg"]
+script/source = "extends Path3D
+
+#var speed=0.1
+#
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+	##$PathFollow3D.h_offset+=delta*speed
+	#$PathFollow3D.progress_ratio+=delta*speed
+	#
+	##if ($PathFollow3D.progress_ratio > 0.9):
+		##generate_path()
+#
+#func generate_path():
+	#var new_point = curve.get_point_position(curve.point_count - 1)
+	#curve.remove_point(0)
+	#new_point = new_point + Vector3(randf(),randf(),randf())
+	#var in_point = Vector3.ZERO  #new_point - Vector3(randf(),randf(),randf())
+	#var out_point = Vector3.ZERO #2 * new_point - in_point
+	#curve.add_point(new_point, in_point, out_point)
+	#curve.set_point_position(0, $PathFollow3D/Pivot.position)
+	##path_location.progress_ratio = 0
+	#
+#func initialize(point1, point2):
+	#curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
+	#curve.add_point(point2, Vector3.ZERO, Vector3.ZERO)
+	
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3wa3k"]
+size = Vector3(0.262406, 0.472065, 0.976334)
+
+[node name="Fish" type="Node3D"]
+script = ExtResource("1_8ytbo")
+speed = 0.775
+path_length = 2.8
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_ac3w8")
+script = SubResource("GDScript_yo2lg")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+rotation_mode = 2
+loop = false
+tilt_enabled = false
+
+[node name="Pivot" type="CharacterBody3D" parent="Path3D/PathFollow3D"]
+
+[node name="Character" parent="Path3D/PathFollow3D/Pivot" instance=ExtResource("1_uk1a8")]
+transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Pivot"]
+transform = Transform3D(1, 0, -5.96046e-08, 3.72527e-09, 0.999996, 7.45055e-09, -2.98022e-08, 0, 0.999996, -0.0321126, -0.0259988, 0.189623)
+shape = SubResource("BoxShape3D_3wa3k")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(0.999869, -0.000700641, -0.0161953, 0.00080517, 0.999979, 0.00644847, 0.0161904, -0.00646064, 0.999848, -0.00370526, -0.00871778, 0.0126445)
+visible = false
+polygon = PackedVector2Array(0, 0, 0.1, 0, 0.1, 0.1, 0, 0.1)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 0.06
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 0.0
+path_joined = false
+smooth_faces = true

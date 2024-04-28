@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="1_eu78p"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_tq1cx"]
+[ext_resource type="PackedScene" uid="uid://dnljxafte1ren" path="res://scenes/fish_spawner.tscn" id="2_6l4cn"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="2_x1aml"]
 [ext_resource type="Shader" path="res://shaders/terrain.gdshader" id="4_8xl3d"]
 [ext_resource type="Script" path="res://scripts/terrain_collision.gd" id="5_7hcy2"]
@@ -144,23 +145,26 @@ surface_material_override/0 = SubResource("StandardMaterial3D_255n5")
 [node name="player" type="XROrigin3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.218877, 0)
 
-[node name="camera" type="XRCamera3D" parent="player"]
-
-[node name="left_hand" type="XRController3D" parent="player"]
-tracker = &"left_hand"
-
-[node name="LeftHand" parent="player/left_hand" instance=ExtResource("1_eu78p")]
-
-[node name="right_hand" type="XRController3D" parent="player"]
-tracker = &"right_hand"
-
-[node name="RightHand" parent="player/right_hand" instance=ExtResource("2_x1aml")]
-
-[node name="environment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_0xlwx")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.941394, 0.00445054, 0.33728, -0.337309, 0.012421, 0.941312, 0, -0.999913, 0.0131943, 0, 0, 0)
+
+[node name="StartXR" parent="." instance=ExtResource("1_tq1cx")]
+
+[node name="Player" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 102.12, 0)
+script = SubResource("GDScript_6lwvt")
+
+[node name="FishSpawner" parent="Player" node_paths=PackedStringArray("root_node", "player_camera") instance=ExtResource("2_6l4cn")]
+root_node = NodePath("../..")
+player_camera = NodePath("../Camera")
+
+[node name="Camera" type="XRCamera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.553013, 0.833173, 0, -0.833173, 0.553013, -0.539629, 8.88536, 7.2744)
+
+[node name="left_hand" type="XRController3D" parent="Player"]
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="Player/left_hand" instance=ExtResource("1_eu78p")]
 
 [node name="StartXR" parent="." instance=ExtResource("1_tq1cx")]
 
