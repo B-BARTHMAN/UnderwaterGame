@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c0de7p2deucd3"]
+[gd_scene load_steps=38 format=3 uid="uid://c0de7p2deucd3"]
 
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="1_eu78p"]
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_tq1cx"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="2_x1aml"]
 [ext_resource type="Shader" path="res://shaders/terrain.gdshader" id="4_8xl3d"]
 [ext_resource type="Script" path="res://scripts/terrain_collision.gd" id="5_7hcy2"]
+[ext_resource type="PackedScene" uid="uid://dsx868eeprgb" path="res://models/fish_orange.glb" id="6_q6m1l"]
+[ext_resource type="PackedScene" path="res://models/rock2.glb" id="7_pjs21"]
+[ext_resource type="PackedScene" uid="uid://lgpepwhpgqv2" path="res://models/rock.glb" id="8_7newp"]
+[ext_resource type="PackedScene" uid="uid://buib2rakfghd0" path="res://models/stone1.glb" id="9_2hbej"]
+[ext_resource type="PackedScene" path="res://models/stone2.glb" id="10_uq0cl"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jf6rn"]
 size = Vector2(100, 100)
@@ -176,7 +181,23 @@ surface_material_override/0 = SubResource("ShaderMaterial_4fwso")
 [node name="terrain_body" type="StaticBody3D" parent="terrain"]
 
 [node name="terrain_collision" type="CollisionShape3D" parent="terrain/terrain_body"]
+visible = false
 shape = SubResource("HeightMapShape3D_hc5ea")
 script = ExtResource("5_7hcy2")
 max_height = 5.0
 height_map = SubResource("NoiseTexture2D_epfjf")
+
+[node name="fish_orange" parent="." instance=ExtResource("6_q6m1l")]
+transform = Transform3D(6.19, 0, 0, 0, 6.19, 0, 0, 0, 6.19, -29.2403, -39.1071, -25.5998)
+
+[node name="rock2" parent="." instance=ExtResource("7_pjs21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2739, -36.5509, -18.5724)
+
+[node name="rock" parent="." instance=ExtResource("8_7newp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.7111, -36.1906, -15.5278)
+
+[node name="stone1" parent="." instance=ExtResource("9_2hbej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.9393, -35.6731, -18.0934)
+
+[node name="stone2" parent="." instance=ExtResource("10_uq0cl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5158, -35.5818, -16.0375)
