@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwluwvsmvbn6f"]
+
+[ext_resource type="PackedScene" uid="uid://nsa8ak6gw4t0" path="res://models/jelly fish einzel.glb" id="1_cejxq"]
+[ext_resource type="Script" path="res://scenes/fish.gd" id="1_pinnh"]
+
+[sub_resource type="Curve3D" id="Curve3D_7r6gs"]
+
+[node name="jellyfish" type="Node3D"]
+script = ExtResource("1_pinnh")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_7r6gs")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+
+[node name="Pivot" type="Node3D" parent="Path3D/PathFollow3D"]
+
+[node name="jelly fish einzel" parent="Path3D/PathFollow3D/Pivot" instance=ExtResource("1_cejxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.066, 0, -0.852221)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3ld44gjwkxl7"]
+
+[ext_resource type="PackedScene" uid="uid://lgpepwhpgqv2" path="res://models/rock.glb" id="1_0if2p"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uwda5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_24orh"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_uwda5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abun3"]
+albedo_color = Color(0.282353, 0.282353, 0.282353, 1)
+roughness = 0.9
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_24orh")
+
+[node name="rock" instance=ExtResource("1_0if2p")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_abun3")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://oqqlbg5boi83"]
+
+[ext_resource type="Script" path="res://scenes/fish.gd" id="1_qusk1"]
+[ext_resource type="PackedScene" path="res://models/turtle_colored.glb" id="1_ruu3i"]
+
+[sub_resource type="Curve3D" id="Curve3D_c55oa"]
+
+[node name="turtle" type="Node3D"]
+script = ExtResource("1_qusk1")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_c55oa")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+
+[node name="Pivot" type="Node3D" parent="Path3D/PathFollow3D"]
+
+[node name="turtle_colored" parent="Path3D/PathFollow3D/Pivot" instance=ExtResource("1_ruu3i")]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0, 0)

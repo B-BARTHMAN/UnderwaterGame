@@ -9,6 +9,10 @@ uniform float u_height;
 void vertex() {
 	//COLOR = vec4(UV,0,1);//texture(u_heightmap, UV);
 	VERTEX.y += texture(u_heightmap, UV).r * u_height;
+	//float v = texture(u_heightmap, UV).r;
+	//float dx = (texture(u_heightmap, UV + vec2(0.001,0)).r - v) * 100.;
+	//float dz = (texture(u_heightmap, UV + vec2(0,0.001)).r - v) * 100.;
+	//NORMAL = normalize(vec3(-dx, 1., -dz));
 	NORMAL = texture(u_normalmap, UV).rgb;
 }
 
