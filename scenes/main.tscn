@@ -90,7 +90,6 @@ tracker = &"left_hand"
 [node name="LeftHand" parent="player/left_hand" instance=ExtResource("2_pfy3o")]
 
 [node name="goldfish_spawner" parent="." node_paths=PackedStringArray("root_node", "player_camera") instance=ExtResource("3_xph0v")]
-spawn_interval = 0.245
 root_node = NodePath("..")
 player_camera = NodePath("../player/camera")
 
