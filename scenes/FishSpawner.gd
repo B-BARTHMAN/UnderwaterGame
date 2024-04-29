@@ -4,6 +4,7 @@ extends Node3D
 @export var fish_limit = 50
 @export var fish_despawn_distance = 50
 
+
 @export var root_node : Node3D
 @export var player_camera : XRCamera3D
 
