@@ -159,18 +159,18 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_q6ufu")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_uc0n1"]
-height = 0.25
-radius = 0.08
+height = 0.11
+radius = 0.03
 
 [node name="SodaCan" type="StaticBody3D"]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 
 [node name="mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 0, 0)
 mesh = SubResource("ArrayMesh_g81c0")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0578343, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0245874, 0)
 shape = SubResource("CylinderShape3D_uc0n1")
