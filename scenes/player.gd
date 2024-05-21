@@ -1,4 +1,4 @@
-extends XROrigin3D
+extends CharacterBody3D
 
 @export var swim_speed : float = 1.
 
@@ -32,7 +32,7 @@ func _process(delta):
 	
 	#movement
 	if left_stick.y > 0.25:
-		global_position -= delta * left_stick.y * swim_speed * camera.global_transform.basis.z
+		move_and_collide(-delta * left_stick.y * swim_speed * camera.global_transform.basis.z)
 	
 	if left_grab > 0.9 and not lh_full:
 		for v in left_objects:
