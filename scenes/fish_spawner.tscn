@@ -18,7 +18,7 @@ script = ExtResource("1_ojxsq")
 fish_scene = ExtResource("2_x8hfy")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 1.165
+wait_time = 0.2
 autostart = true
 
 [node name="SpawnPath" type="Path3D" parent="."]
