@@ -24,7 +24,7 @@ func add_path_node() -> void:
 	var new_point = path.get_point_position(path.point_count - 1)
 	var new_dir = -fish.global_transform.basis.z.normalized() * path_length
 	new_dir = new_dir.rotated(fish.global_transform.basis.x, randf_range(-PI / 1, PI / 1))
-	new_dir = new_dir.rotated(fish.global_tsransform.basis.y, randf_range(-PI / 1, PI / 1))
+	new_dir = new_dir.rotated(fish.global_transform.basis.y, randf_range(-PI / 1, PI / 1))
 	new_dir = new_dir.rotated(fish.global_transform.basis.z, randf_range(-PI / 1, PI / 1))
 	new_point = new_point + new_dir
 	path.add_point(new_point, 2*get_rdm_dir(), Vector3.ZERO)

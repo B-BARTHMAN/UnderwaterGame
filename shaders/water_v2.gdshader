@@ -1,6 +1,7 @@
 shader_type spatial;
 
 render_mode diffuse_burley;
+render_mode cull_front;
 
 #define WAVE_COUNT 32
 

@@ -41,7 +41,7 @@ size = Vector3(0.262406, 0.472065, 0.976334)
 [node name="Fish" type="Node3D"]
 script = ExtResource("1_or128")
 speed = 0.2
-path_length = 2.8
+path_length = 8.4
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_ac3w8")
