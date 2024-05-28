@@ -40,7 +40,7 @@ size = Vector3(0.262406, 0.472065, 0.976334)
 
 [node name="Fish" type="Node3D"]
 script = ExtResource("1_8h0to")
-speed = 0.775
+speed = 0.1
 path_length = 2.8
 
 [node name="Path3D" type="Path3D" parent="."]
