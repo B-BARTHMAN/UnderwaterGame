@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://co5mom02xhwb8"]
+
+[ext_resource type="PackedScene" uid="uid://b313s8rf6b2yy" path="res://project final models/glb models/oil_barrel.glb" id="1_nlmg0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ngiph"]
+height = 1.0
+radius = 0.33
+
+[node name="oil_barrel" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="oil_barrel" parent="." instance=ExtResource("1_nlmg0")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_ngiph")

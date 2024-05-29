@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://6augonx1dyo7"]
+
+[ext_resource type="PackedScene" path="res://project final models/glb models/smashed_can_3.glb" id="1_dkaap"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_njjke"]
+height = 0.177682
+radius = 0.0595181
+
+[node name="smashed_can_3" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="smashed_can_3" parent="." instance=ExtResource("1_dkaap")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.0191463, 0.066981, 0.0245119)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_njjke")
