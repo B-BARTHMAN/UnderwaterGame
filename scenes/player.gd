@@ -31,8 +31,11 @@ func _process(delta):
 	var right_grab := righthand.get_float("grip")
 	
 	#movement
-	if left_stick.y > 0.25:
-		move_and_collide(-delta * left_stick.y * swim_speed * camera.global_transform.basis.z)
+	velocity = Vector3(0, 0, 0)
+	if left_stick.y > 0.1:
+		velocity = -delta * left_stick.y * swim_speed * camera.global_transform.basis.z
+		move_and_slide()
+	position += velocity
 	
 	if left_grab > 0.9 and not lh_full:
 		for v in left_objects:
